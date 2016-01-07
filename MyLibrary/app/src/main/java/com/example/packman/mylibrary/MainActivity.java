@@ -1,43 +1,68 @@
 package com.example.packman.mylibrary;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
 
-public class MainActivity extends FragmentActivity {
-    public static final String YOUR_APPLICATION_ID = "dtxFKaLfF2gArJvKC8W8MTjNSdy3lx9LhvvjU9G9";
-    public static final String YOUR_CLIENT_KEY = "nfyCghcM709zEDuiP0BmAnr6ir3FKO4WuC9DCGcU";
+public class MainActivity extends AppCompatActivity{
     ViewPager mViewPager;
     MyLibraryPageAdapter pageAdapter;
+    Toolbar toolbar;
+    static TabLayout tabLayout;
+    public static final String YOUR_APPLICATION_ID = "dtxFKaLfF2gArJvKC8W8MTjNSdy3lx9LhvvjU9G9";
+    public static final String YOUR_CLIENT_KEY = "nfyCghcM709zEDuiP0BmAnr6ir3FKO4WuC9DCGcU";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pageAdapter = new MyLibraryPageAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(pageAdapter);
-
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, YOUR_APPLICATION_ID, YOUR_CLIENT_KEY);
 
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
+
+        pageAdapter = new MyLibraryPageAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(pageAdapter);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        mViewPager.setCurrentItem(tab.getPosition());
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+        tabLayout.getTabAt(0).setText("Favourite Books");
+        tabLayout.getTabAt(1).setText("Authors");
+        tabLayout.getTabAt(2).setText("Categories");
+        tabLayout.getTabAt(3).setText("Books");
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+
     }
 
     @Override
