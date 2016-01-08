@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class FavouriteBooksFragment extends Fragment {
+    private View booksView;
     private ListView listOfBooks;
     public FavouriteBooksFragment() {
     }
@@ -19,7 +20,8 @@ public class FavouriteBooksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        listOfBooks = (ListView) getView().findViewById(R.id.listView);
-        return inflater.inflate(R.layout.fragment_favourite_books, container, false);
+        booksView = (View)inflater.inflate(R.layout.fragment_books, container, false);
+        listOfBooks = (ListView) booksView.findViewById(R.id.booksList);
+        return booksView;
     }
 }
