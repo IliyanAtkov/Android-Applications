@@ -53,7 +53,6 @@ public class CategoriesFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
             adapter = (new ArrayAdapter<String>(getActivity(), R.layout.fragment_categories, R.id.categoryTextView));
             // Retrieve object "name" from Parse.com database
             for (ParseObject category : categories) {
