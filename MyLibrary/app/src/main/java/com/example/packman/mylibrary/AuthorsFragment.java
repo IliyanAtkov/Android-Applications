@@ -31,14 +31,14 @@ public class AuthorsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View authorsView = inflater.inflate(R.layout.fragment_authors, container, false);
         listView = (ListView) authorsView.findViewById(R.id.authorsList);
-        new LoadAuthors().execute();
+        //new LoadAuthors().execute();
         return authorsView;
     }
 
     private class LoadAuthors extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Authors");
+            ParseQuery<ParseObject> query = new ParseQuery("Authors");
             try {
                 authors = query.find();
             } catch (ParseException e) {

@@ -1,5 +1,6 @@
 package com.example.packman.mylibrary;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.packman.mylibrary.Services.LocationService;
+import com.example.packman.mylibrary.Services.ScreenOrientationService;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -20,17 +23,14 @@ public class MainActivity extends AppCompatActivity {
     MyLibraryPageAdapter pageAdapter;
     Toolbar toolbar;
     static TabLayout tabLayout;
-    public static final String YOUR_APPLICATION_ID = "dtxFKaLfF2gArJvKC8W8MTjNSdy3lx9LhvvjU9G9";
-    public static final String YOUR_CLIENT_KEY = "nfyCghcM709zEDuiP0BmAnr6ir3FKO4WuC9DCGcU";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, YOUR_APPLICATION_ID, YOUR_CLIENT_KEY);
-
+        startService(new Intent(this, ScreenOrientationService.class));
+        startService(new Intent(this, LocationService.class));
 
         pageAdapter = new MyLibraryPageAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
