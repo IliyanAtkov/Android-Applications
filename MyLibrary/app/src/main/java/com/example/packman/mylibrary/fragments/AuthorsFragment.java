@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary.fragments;
+package com.example.packman.mylibrary.Fragments;
 
 
 import android.content.Context;
@@ -13,8 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.packman.mylibrary.R;
-import com.example.packman.mylibrary.adapters.AuthorsAdapter;
-import com.example.packman.mylibrary.models.Author;
+import com.example.packman.mylibrary.Adapters.AuthorsAdapter;
+import com.example.packman.mylibrary.Models.Author;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;

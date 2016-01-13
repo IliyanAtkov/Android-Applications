@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary.fragments;
+package com.example.packman.mylibrary.Fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary.fragments;
+package com.example.packman.mylibrary.Fragments;
 
 
 import android.os.AsyncTask;
@@ -12,14 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.packman.mylibrary.R;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.net.URLConnection;
 import java.util.List;
 
 public class CategoriesFragment extends Fragment {
