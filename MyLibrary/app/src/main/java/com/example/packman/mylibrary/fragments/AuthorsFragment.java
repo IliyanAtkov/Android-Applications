@@ -1,6 +1,7 @@
 package com.example.packman.mylibrary.fragments;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,38 +11,70 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.packman.mylibrary.R;
+import com.example.packman.mylibrary.adapters.AuthorsAdapter;
+import com.example.packman.mylibrary.models.Author;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorsFragment extends Fragment {
-    List<ParseObject> authors;
+    Context context;
+    List<ParseObject> authorsAsParseObjects;
     ListView listView;
-    ArrayAdapter<String> adapter;
-    
+    ArrayAdapter<Author> adapter;
+    ArrayList<Author> authors;
+    ParseQuery<ParseObject> db;
+
     public AuthorsFragment() {
+    }
+
+   // public AuthorsFragment(Context context) {
+   //     this(context, new ParseQuery<>(context.getString(R.string.authors_table_name)));
+   // }
+//
+   // public AuthorsFragment(Context context, ParseQuery<ParseObject> db) {
+   //     this(context, db, new AuthorsAdapter(context, R.layout.row_list_authors, null));
+   // }
+//
+   // public AuthorsFragment(Context context, ParseQuery<ParseObject> db, ArrayAdapter<Author> adapter) {
+   //     this.context = context;
+   //     this.db = db;
+   //     this.adapter = adapter;
+   // }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.context = getContext();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View authorsView = inflater.inflate(R.layout.fragment_authors, container, false);
-        listView = (ListView) authorsView.findViewById(R.id.authorsList);
+        this.db = new ParseQuery<>(this.getString(R.string.authors_table_name));
+        this.authors = new ArrayList<>();
+        listView = (ListView) authorsView.findViewById(R.id.list_authors);
+
         new LoadAuthors().execute();
         return authorsView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     private class LoadAuthors extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            ParseQuery<ParseObject> query = new ParseQuery("Authors");
             try {
-                authors = query.find();
+                authorsAsParseObjects = db.find();
             } catch (ParseException e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
@@ -51,12 +84,10 @@ public class AuthorsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            adapter = (new ArrayAdapter<String>(getActivity(), R.layout.fragment_authors, R.id.authorsTextView));
-            // Retrieve object "name" from Parse.com database
-            for (ParseObject author : authors) {
-                adapter.add((String) author.get("Name"));
+            for (ParseObject author : authorsAsParseObjects) {
+                authors.add(new Author((String)author.get("Name"), (String)author.get("Img_url")));
             }
-            // Binds the Adapter to the ListView
+            adapter = new AuthorsAdapter(context, R.layout.row_list_authors, authors);
             listView.setAdapter(adapter);
         }
     }
