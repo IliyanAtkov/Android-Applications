@@ -1,10 +1,12 @@
-package com.example.packman.mylibrary;
+package com.example.packman.mylibrary.fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.packman.mylibrary.R;
 
 /**
  * A placeholder fragment containing a simple view.

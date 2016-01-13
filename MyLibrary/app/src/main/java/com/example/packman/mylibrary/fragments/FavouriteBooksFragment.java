@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary;
+package com.example.packman.mylibrary.fragments;
 
 
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.packman.mylibrary.R;
 
 public class FavouriteBooksFragment extends Fragment {
     private View booksView;

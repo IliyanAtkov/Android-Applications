@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary;
+package com.example.packman.mylibrary.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.packman.mylibrary.R;
 
 public class BookFeedsAdapter extends CursorAdapter {
 

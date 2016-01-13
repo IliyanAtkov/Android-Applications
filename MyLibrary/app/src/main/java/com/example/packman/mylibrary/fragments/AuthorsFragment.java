@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary;
+package com.example.packman.mylibrary.fragments;
 
 
 import android.os.AsyncTask;
@@ -10,40 +10,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.Parse;
+import com.example.packman.mylibrary.R;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.net.URLConnection;
 import java.util.List;
 
-public class CategoriesFragment extends Fragment {
-    List<ParseObject> categories;
+public class AuthorsFragment extends Fragment {
+    List<ParseObject> authors;
     ListView listView;
     ArrayAdapter<String> adapter;
-
-    public CategoriesFragment() {
+    
+    public AuthorsFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View categoriesView = inflater.inflate(R.layout.fragment_categories, container, false);
-        listView = (ListView) categoriesView.findViewById(R.id.categoriesList);
-         new LoadCategories().execute();
-        return categoriesView;
+        View authorsView = inflater.inflate(R.layout.fragment_authors, container, false);
+        listView = (ListView) authorsView.findViewById(R.id.authorsList);
+        new LoadAuthors().execute();
+        return authorsView;
     }
 
-    private class LoadCategories extends AsyncTask<Void, Void, Void> {
+    private class LoadAuthors extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Categories");
+            ParseQuery<ParseObject> query = new ParseQuery("Authors");
             try {
-                categories = query.find();
+                authors = query.find();
             } catch (ParseException e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
@@ -53,10 +51,10 @@ public class CategoriesFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            adapter = (new ArrayAdapter<String>(getActivity(), R.layout.fragment_categories, R.id.categoryTextView));
+            adapter = (new ArrayAdapter<String>(getActivity(), R.layout.fragment_authors, R.id.authorsTextView));
             // Retrieve object "name" from Parse.com database
-            for (ParseObject category : categories) {
-                adapter.add((String) category.get("Title"));
+            for (ParseObject author : authors) {
+                adapter.add((String) author.get("Name"));
             }
             // Binds the Adapter to the ListView
             listView.setAdapter(adapter);

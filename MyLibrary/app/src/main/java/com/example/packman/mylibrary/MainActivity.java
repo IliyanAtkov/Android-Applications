@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,8 +14,10 @@ import android.view.MenuItem;
 
 import com.example.packman.mylibrary.Services.LocationService;
 import com.example.packman.mylibrary.Services.ScreenOrientationService;
-import com.parse.Parse;
-import com.parse.ParseObject;
+import com.example.packman.mylibrary.fragments.AuthorsFragment;
+import com.example.packman.mylibrary.fragments.BooksFragment;
+import com.example.packman.mylibrary.fragments.CategoriesFragment;
+import com.example.packman.mylibrary.fragments.FavouriteBooksFragment;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager mViewPager;

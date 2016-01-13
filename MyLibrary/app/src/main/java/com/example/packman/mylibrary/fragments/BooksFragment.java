@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary;
+package com.example.packman.mylibrary.fragments;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.example.packman.mylibrary.R;
+import com.example.packman.mylibrary.SimpleCursorLoader;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -51,7 +54,7 @@ public class BooksFragment extends Fragment implements LoaderManager.LoaderCallb
 
     }
 
-    public static final class BooksCursorLoader extends SimpleCursorLoader{
+    public static final class BooksCursorLoader extends SimpleCursorLoader {
 
         public BooksCursorLoader(Context context) {
             super(context);
