@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary.Models;
+package com.example.packman.mylibrary.models;
 
 import com.example.packman.mylibrary.Globals.GlobalConstants;
 import com.parse.ParseClassName;
@@ -6,8 +6,10 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.io.Serializable;
+
 @ParseClassName(GlobalConstants.BOOKS_PARSE_OBJ_NAME)
-public class Books extends ParseObject {
+public class Books extends ParseObject implements Serializable{
 
     public String getTitle(){
         return getString("Title");

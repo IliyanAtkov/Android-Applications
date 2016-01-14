@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.packman.mylibrary"
     android:installLocation="preferExternal">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -24,13 +25,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:enabled="true"  android:name=".Services.ScreenOrientationService">
+
+        <service
+            android:name=".Services.ScreenOrientationService"
+            android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.CONFIGURATION_CHANGED"/>
+                <action android:name="android.intent.action.CONFIGURATION_CHANGED" />
             </intent-filter>
         </service>
-        <service android:name=".Services.LocationService">
-            </service>
+        <service android:name=".Services.LocationService"></service>
+
+        <activity
+            android:name=".SingleBookActivity"
+            android:label="@string/title_activity_single_book"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

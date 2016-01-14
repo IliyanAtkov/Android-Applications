@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary.Models;
+package com.example.packman.mylibrary.models;
 
 public class Author {
     private String name;

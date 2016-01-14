@@ -6,4 +6,6 @@ public class GlobalConstants {
 
     public static final String BOOKS_PARSE_OBJ_NAME = "Books";
 
+    public static final String BOOK_TO_PASS_ID = "BookID";
+
 }

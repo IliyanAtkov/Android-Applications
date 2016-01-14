@@ -7,4 +7,5 @@
     <string name="authors_table_name" translatable="false">Authors</string>
     <string name="categories_table_name" translatable="false">Categories</string>
     <string name="books_table_name" translatable="false">Books</string>
+    <string name="title_activity_single_book">SingleBookActivity</string>
 </resources>

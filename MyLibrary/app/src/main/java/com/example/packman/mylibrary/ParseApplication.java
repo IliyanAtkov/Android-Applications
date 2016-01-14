@@ -3,7 +3,7 @@ package com.example.packman.mylibrary;
 import android.app.Application;
 
 import com.example.packman.mylibrary.Globals.GlobalConstants;
-import com.example.packman.mylibrary.Models.Books;
+import com.example.packman.mylibrary.models.Books;
 import com.parse.Parse;
 import com.parse.ParseObject;
 

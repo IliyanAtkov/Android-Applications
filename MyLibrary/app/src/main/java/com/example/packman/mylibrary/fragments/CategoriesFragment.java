@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary.Fragments;
+package com.example.packman.mylibrary.fragments;
 
 
 import android.os.AsyncTask;

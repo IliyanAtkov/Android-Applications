@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary.Fragments;
+package com.example.packman.mylibrary.fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.packman.mylibrary.Adapters.BookAdapter;
+import com.example.packman.mylibrary.adapters.BookListAdapter;
 import com.example.packman.mylibrary.R;
 
 public class BooksFragment extends Fragment{
@@ -20,7 +20,7 @@ public class BooksFragment extends Fragment{
                              Bundle savedInstanceState) {
         View booksView = (View)inflater.inflate(R.layout.fragment_books, container, false);
         ListView booksList = (ListView)booksView.findViewById(R.id.booksList);
-        BookAdapter mAdapter = new BookAdapter(getActivity());
+        BookListAdapter mAdapter = new BookListAdapter(getActivity());
         booksList.setAdapter(mAdapter);
         mAdapter.loadObjects();
 

@@ -14,10 +14,10 @@ import android.view.MenuItem;
 
 import com.example.packman.mylibrary.Services.LocationService;
 import com.example.packman.mylibrary.Services.ScreenOrientationService;
-import com.example.packman.mylibrary.Fragments.AuthorsFragment;
-import com.example.packman.mylibrary.Fragments.BooksFragment;
-import com.example.packman.mylibrary.Fragments.CategoriesFragment;
-import com.example.packman.mylibrary.Fragments.FavouriteBooksFragment;
+import com.example.packman.mylibrary.fragments.AuthorsFragment;
+import com.example.packman.mylibrary.fragments.BooksFragment;
+import com.example.packman.mylibrary.fragments.CategoriesFragment;
+import com.example.packman.mylibrary.fragments.FavouriteBooksFragment;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager mViewPager;

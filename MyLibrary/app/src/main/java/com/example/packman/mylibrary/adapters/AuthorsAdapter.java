@@ -1,4 +1,4 @@
-package com.example.packman.mylibrary.Adapters;
+package com.example.packman.mylibrary.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.packman.mylibrary.ImageLoadTask;
 import com.example.packman.mylibrary.R;
-import com.example.packman.mylibrary.Models.Author;
+import com.example.packman.mylibrary.models.Author;
 
 import java.util.ArrayList;
 
