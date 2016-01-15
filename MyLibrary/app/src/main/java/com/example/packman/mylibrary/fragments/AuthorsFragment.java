@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.GridView;
 
 import com.example.packman.mylibrary.R;
 import com.example.packman.mylibrary.adapters.AuthorsAdapter;
@@ -25,7 +25,7 @@ import java.util.List;
 public class AuthorsFragment extends Fragment {
     Context context;
     List<ParseObject> authorsAsParseObjects;
-    ListView listView;
+    GridView gridView;
     ArrayAdapter<Author> adapter;
     ArrayList<Author> authors;
     ParseQuery<ParseObject> db;
@@ -59,7 +59,7 @@ public class AuthorsFragment extends Fragment {
         View authorsView = inflater.inflate(R.layout.fragment_authors, container, false);
         this.db = new ParseQuery<>(this.getString(R.string.authors_table_name));
         this.authors = new ArrayList<>();
-        listView = (ListView) authorsView.findViewById(R.id.list_authors);
+        gridView = (GridView) authorsView.findViewById(R.id.grid_authors);
 
         new LoadAuthors().execute();
         return authorsView;
@@ -88,7 +88,7 @@ public class AuthorsFragment extends Fragment {
                 authors.add(new Author((String)author.get("Name"), (String)author.get("Img_url")));
             }
             adapter = new AuthorsAdapter(context, R.layout.row_list_authors, authors);
-            listView.setAdapter(adapter);
+            gridView.setAdapter(adapter);
         }
     }
 }
