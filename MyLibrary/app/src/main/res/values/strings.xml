@@ -8,4 +8,8 @@
     <string name="categories_table_name" translatable="false">Categories</string>
     <string name="books_table_name" translatable="false">Books</string>
     <string name="title_activity_single_book">SingleBookActivity</string>
+    <string name="title_activity_single_author">SingleAuthorActivity</string>
+    <string name="author_nationality">Националност:</string>
+    <string name="author_born">Роден:</string>
+    <string name="author_died">Починал :</string>
 </resources>

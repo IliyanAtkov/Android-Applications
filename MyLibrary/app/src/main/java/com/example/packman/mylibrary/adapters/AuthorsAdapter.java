@@ -1,59 +1,53 @@
 package com.example.packman.mylibrary.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.packman.mylibrary.Globals.GlobalConstants;
 import com.example.packman.mylibrary.ImageLoadTask;
 import com.example.packman.mylibrary.R;
-import com.example.packman.mylibrary.models.Author;
+import com.example.packman.mylibrary.models.Authors;
+import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 
-import java.util.ArrayList;
-
-public class AuthorsAdapter extends ArrayAdapter<Author> {
-    Context context;
-    int layoutResourceId;
-    ArrayList<Author> authors = null;
-
-    public AuthorsAdapter(Context context, int layoutResourceId, ArrayList<Author> authors) {
-        super(context, layoutResourceId, authors);
-        this.context = context;
-        this.authors = authors;
-        this.layoutResourceId = layoutResourceId;
+public class AuthorsAdapter extends ParseQueryAdapter<Authors>{
+    public AuthorsAdapter(Context context) {
+        super(context, new QueryFactory<Authors>() {
+            @Override
+            public ParseQuery<Authors> create() {
+                ParseQuery query = new ParseQuery(GlobalConstants.AUTHORS_PARSE_OBJ_NAME);
+                return query;
+            }
+        });
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        AuthorHolder holder = null;
+     @Override
+     public View getItemView(Authors authors, View v, ViewGroup parent){
+         AuthorHolder holder = null;
 
-        if (row == null) {
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
+         if (v == null){
+             v = View.inflate(getContext(), R.layout.row_list_authors, null);
 
-            holder = new AuthorHolder();
-            holder.picture = (ImageView)row.findViewById(R.id.img_author);
-            holder.name = (TextView)row.findViewById(R.id.tv_author);
+             holder = new AuthorHolder();
+             holder.authorImage = (ImageView)v.findViewById(R.id.img_author);
+             holder.authorName = (TextView)v.findViewById(R.id.tv_author);
 
-            row.setTag(holder);
-        } else {
-            holder = (AuthorHolder)row.getTag();
-        }
+             v.setTag(holder);
+         } else {
+             holder = (AuthorHolder)v.getTag();
+         }
 
-        Author author = authors.get(position);
-        holder.name.setText(author.getName());
-        new ImageLoadTask(author.getImgUrl(), holder.picture).execute();
+         new ImageLoadTask(authors.getImgUrl(), holder.authorImage).execute();
 
-        return row;
-    }
+         holder.authorName.setText(authors.getName());
+         return v;
+     }
 
     private static class AuthorHolder {
-        ImageView picture;
-        TextView name;
+        ImageView authorImage;
+        TextView authorName;
     }
 }

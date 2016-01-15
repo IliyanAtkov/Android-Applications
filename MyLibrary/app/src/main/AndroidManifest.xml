@@ -39,6 +39,10 @@
             android:name=".SingleBookActivity"
             android:label="@string/title_activity_single_book"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".SingleAuthorActivity"
+            android:label="@string/title_activity_single_author"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
