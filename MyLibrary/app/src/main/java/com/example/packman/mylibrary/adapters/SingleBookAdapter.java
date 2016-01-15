@@ -1,11 +1,24 @@
 package com.example.packman.mylibrary.adapters;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.packman.mylibrary.Globals.GlobalConstants;
+import com.example.packman.mylibrary.MainActivity;
+import com.example.packman.mylibrary.SingleBookActivity;
+import com.example.packman.mylibrary.data.BooksContract;
+import com.example.packman.mylibrary.data.MyLibraryDbHelper;
+import com.example.packman.mylibrary.fragments.FavouriteBooksFragment;
 import com.example.packman.mylibrary.models.Books;
 import com.example.packman.mylibrary.R;
 import com.parse.ParseException;
@@ -15,12 +28,17 @@ import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
 
-public class SingleBookAdapter extends ParseQueryAdapter<Books>{
-    private static String bookToPassID;
-    public SingleBookAdapter(Context context,final String bookID){
+public class SingleBookAdapter extends ParseQueryAdapter<Books> {
+    private static Books bookToFavourite;
+    private static SQLiteOpenHelper SQLiteHelper;
+    private static SQLiteDatabase db;
+    private static String calledFrom;
+
+    public SingleBookAdapter(Context context, final String bookID, final String from) {
         super(context, new QueryFactory<Books>() {
             public ParseQuery create() {
-                ParseQuery query = new ParseQuery(GlobalConstants.BOOKS_PARSE_OBJ_NAME);
+                calledFrom = from;
+                ParseQuery query = new ParseQuery(GlobalConstants.BOOKS_PARSE_TABLE_NAME);
                 try {
                     query.get(bookID);
                 } catch (ParseException e) {
@@ -32,20 +50,81 @@ public class SingleBookAdapter extends ParseQueryAdapter<Books>{
     }
 
     @Override
-    public View getItemView(Books bookObject, View v, ViewGroup parent){
-        //bookToPassID=bookObject.getObjectID();
-        if (v == null){
+    public View getItemView(Books bookObject, View v, ViewGroup parent) {
+        bookToFavourite = bookObject;
+        if (v == null) {
             v = View.inflate(getContext(), R.layout.content_single_book, null);
         }
+        Button addToFavouriteButton = (Button) v.findViewById(R.id.add_book_to_favourite_button);
 
-        //v.setClickable(true);
-        //v.setOnClickListener(this);
+        SQLiteHelper = new MyLibraryDbHelper(getContext());
+        db = SQLiteHelper.getWritableDatabase();
+
+        if (calledFrom.equals(GlobalConstants.CALLED_FROM_BOOKS)) {
+            addToFavouriteButton.setText("Add to Favourite");
+            addToFavouriteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String query = "SELECT * FROM "
+                            + BooksContract.FavouriteBooksIdsEntry.TABLE_NAME
+                            + " WHERE "
+                            + BooksContract.FavouriteBooksIdsEntry.COLUMN_FAVOURITE_BOOK_PARSE_ID
+                            + "='"
+                            + bookToFavourite.getObjectID() + "'";
+
+                    Cursor c = db.rawQuery(query, null);
+
+                    if (c.getCount() == 0) {
+                        ContentValues values = new ContentValues();
+                        values.put(BooksContract.FavouriteBooksIdsEntry.COLUMN_FAVOURITE_BOOK_PARSE_ID, bookToFavourite.getObjectID());
+                        db.insert(
+                                BooksContract.FavouriteBooksIdsEntry.TABLE_NAME,
+                                null,
+                                values);
+                        Toast.makeText(getContext(), "Book was added to favourites", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Book was already added to favourites", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            addToFavouriteButton.setText("REMOVE");
+            addToFavouriteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String query = "DELETE FROM "
+                            + BooksContract.FavouriteBooksIdsEntry.TABLE_NAME
+                            + " WHERE "
+                            + BooksContract.FavouriteBooksIdsEntry.COLUMN_FAVOURITE_BOOK_PARSE_ID
+                            + "='"
+                            + bookToFavourite.getObjectID() + "'";
+
+                    //db.rawQuery(query,null);
+
+                    int a = db.delete(BooksContract.FavouriteBooksIdsEntry.TABLE_NAME,BooksContract.FavouriteBooksIdsEntry.COLUMN_FAVOURITE_BOOK_PARSE_ID
+                            + "='"
+                            + bookToFavourite.getObjectID() + "'",null);
+                    Log.d("aaaa", a+"");
+                    Intent in = new Intent(getContext(), MainActivity.class);
+                    in.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    getContext().startActivity(in);
+                }
+
+            });
+        }
+        Button downloadButton = (Button) v.findViewById(R.id.download_book_button);
+        downloadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         super.getItemView(bookObject, v, parent);
 
-        ParseImageView bookImage = (ParseImageView)v.findViewById(R.id.single_book_image);
+        ParseImageView bookImage = (ParseImageView) v.findViewById(R.id.single_book_image);
         ParseFile imageFile = bookObject.getImage();
-        if (imageFile != null){
+        if (imageFile != null) {
             bookImage.setParseFile(imageFile);
             bookImage.loadInBackground();
         }
@@ -64,11 +143,4 @@ public class SingleBookAdapter extends ParseQueryAdapter<Books>{
 
         return v;
     }
-
-    /*@Override
-    /*public void onClick(View v) {
-        Intent in = new Intent(this.getContext(), SingleBookActivity.class);
-        in.putExtra(GlobalConstants.BOOK_TO_PASS_ID,bookToPassID);
-        this.getContext().startActivity(in);
-    }*/
 }

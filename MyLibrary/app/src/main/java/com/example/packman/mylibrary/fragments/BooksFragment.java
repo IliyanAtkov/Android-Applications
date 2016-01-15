@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.packman.mylibrary.Globals.GlobalConstants;
 import com.example.packman.mylibrary.adapters.BookListAdapter;
 import com.example.packman.mylibrary.R;
 
@@ -20,7 +21,7 @@ public class BooksFragment extends Fragment{
                              Bundle savedInstanceState) {
         View booksView = (View)inflater.inflate(R.layout.fragment_books, container, false);
         ListView booksList = (ListView)booksView.findViewById(R.id.booksList);
-        BookListAdapter mAdapter = new BookListAdapter(getActivity());
+        BookListAdapter mAdapter = new BookListAdapter(getActivity(),GlobalConstants.CALLED_FROM_BOOKS);
         booksList.setAdapter(mAdapter);
         mAdapter.loadObjects();
 

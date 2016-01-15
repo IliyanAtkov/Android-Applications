@@ -1,9 +1,15 @@
-<TextView
-    android:id="@+id/text3"
+<LinearLayout
+    android:id="@+id/text1"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:padding="32dp"
-    android:text="favouriteBooks"
-    android:textSize="24sp"/>
+    android:textSize="24sp"
+    android:orientation="vertical">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/favourite_book_list"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
