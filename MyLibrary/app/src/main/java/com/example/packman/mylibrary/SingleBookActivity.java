@@ -26,8 +26,9 @@ public class SingleBookActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String bookID = intent.getExtras().getString(GlobalConstants.BOOK_TO_PASS_ID);
+        String calledFrom = intent.getExtras().getString(GlobalConstants.CALLED_FROM);
 
-        SingleBookAdapter mAdapter = new SingleBookAdapter(this,bookID);
+        SingleBookAdapter mAdapter = new SingleBookAdapter(this,bookID,calledFrom);
         booksList.setAdapter(mAdapter);
         mAdapter.loadObjects();
         }

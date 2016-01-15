@@ -8,7 +8,7 @@ import com.parse.ParseQuery;
 
 import java.io.Serializable;
 
-@ParseClassName(GlobalConstants.BOOKS_PARSE_OBJ_NAME)
+@ParseClassName(GlobalConstants.BOOKS_PARSE_TABLE_NAME)
 public class Books extends ParseObject implements Serializable{
 
     public String getTitle(){

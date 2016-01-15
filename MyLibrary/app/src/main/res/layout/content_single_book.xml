@@ -10,7 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.packman.mylibrary.SingleBookActivity"
-    tools:showIn="@layout/activity_single_book"
     android:id="@+id/single_book">
 
     <com.parse.ParseImageView
@@ -62,6 +61,25 @@
         android:layout_below="@+id/single_book_image"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp" />
+        android:layout_marginTop="29dp"
+        android:layout_centerHorizontal="true"
+        android:minHeight="550dp" />
+
+    <Button
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:text="Download Book"
+        android:id="@+id/download_book_button"
+        android:layout_alignTop="@+id/add_book_to_favourite_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:text="Add to Favourite"
+        android:id="@+id/add_book_to_favourite_button"
+        android:layout_alignBottom="@+id/single_book_description"
+        android:layout_alignRight="@+id/single_book_description"
+        android:layout_alignEnd="@+id/single_book_description" />
 
 </RelativeLayout>
