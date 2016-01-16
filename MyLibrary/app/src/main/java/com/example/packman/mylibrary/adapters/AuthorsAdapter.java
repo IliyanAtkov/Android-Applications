@@ -18,7 +18,7 @@ public class AuthorsAdapter extends ParseQueryAdapter<Authors>{
         super(context, new QueryFactory<Authors>() {
             @Override
             public ParseQuery<Authors> create() {
-                ParseQuery query = new ParseQuery(GlobalConstants.AUTHORS_PARSE_OBJ_NAME);
+                ParseQuery query = new ParseQuery(GlobalConstants.AUTHORS_PARSE_TABLE_NAME);
                 return query;
             }
         });

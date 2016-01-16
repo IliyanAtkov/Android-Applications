@@ -12,4 +12,5 @@
     <string name="author_nationality">Националност:</string>
     <string name="author_born">Роден:</string>
     <string name="author_died">Починал :</string>
+    <string name="title_activity_books_by_category">BooksByCategoryActivity</string>
 </resources>

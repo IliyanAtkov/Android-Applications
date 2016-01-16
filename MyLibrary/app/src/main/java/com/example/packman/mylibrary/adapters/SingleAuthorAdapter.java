@@ -18,7 +18,7 @@ public class SingleAuthorAdapter extends ParseQueryAdapter<Authors>{
     public SingleAuthorAdapter(Context context,final String authorId){
         super(context, new QueryFactory<Authors>() {
             public ParseQuery create() {
-                ParseQuery query = new ParseQuery(GlobalConstants.AUTHORS_PARSE_OBJ_NAME);
+                ParseQuery query = new ParseQuery(GlobalConstants.AUTHORS_PARSE_TABLE_NAME);
                 try {
                     query.get(authorId);
                 } catch (ParseException e) {

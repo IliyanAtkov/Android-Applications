@@ -8,7 +8,7 @@ import com.parse.ParseQuery;
 import java.io.Serializable;
 import java.util.Date;
 
-@ParseClassName(GlobalConstants.AUTHORS_PARSE_OBJ_NAME)
+@ParseClassName(GlobalConstants.AUTHORS_PARSE_TABLE_NAME)
 public class Authors extends ParseObject implements Serializable {
 
     public String getName() {

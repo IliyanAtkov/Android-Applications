@@ -48,9 +48,14 @@
             android:label="@string/title_activity_single_book"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".BooksByCategoryActivity"
+            android:label="@string/title_activity_books_by_category"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".SingleAuthorActivity"
             android:label="@string/title_activity_single_author"
-            android:theme="@style/AppTheme.NoActionBar"></activity>       <receiver
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <receiver
             android:name=".Services.ParsePushNotificationReceiver"
             android:exported="false">
             <intent-filter>

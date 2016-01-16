@@ -33,7 +33,7 @@ public class BookListAdapter extends ParseQueryAdapter<Books> implements View.On
                 calledFrom = from;
                 if (from == GlobalConstants.CALLED_FROM_BOOKS) {
                     return query;
-                } else {
+                } else if (from == GlobalConstants.CALLED_FROM_FAVOURITES) {
                     SQLiteOpenHelper SQLiteHelper = new MyLibraryDbHelper(context);
                     SQLiteDatabase db = SQLiteHelper.getWritableDatabase();
                     String sql = "SELECT "+BooksContract.FavouriteBooksIdsEntry.COLUMN_FAVOURITE_BOOK_PARSE_ID+" FROM "
@@ -49,6 +49,9 @@ public class BookListAdapter extends ParseQueryAdapter<Books> implements View.On
                     }
 
                     query.whereContainedIn("objectId",list);
+                    return query;
+                } else {
+                    query.whereEqualTo("Category", from);
                     return query;
                 }
             }
