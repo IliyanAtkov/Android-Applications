@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,11 +24,16 @@ import com.example.packman.mylibrary.data.MyLibraryDbHelper;
 import com.example.packman.mylibrary.fragments.FavouriteBooksFragment;
 import com.example.packman.mylibrary.models.Books;
 import com.example.packman.mylibrary.R;
+import com.parse.GetDataCallback;
+import com.parse.GetFileCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ProgressCallback;
+
+import java.io.File;
 
 
 public class SingleBookAdapter extends ParseQueryAdapter<Books> {
@@ -33,6 +41,9 @@ public class SingleBookAdapter extends ParseQueryAdapter<Books> {
     private static SQLiteOpenHelper SQLiteHelper;
     private static SQLiteDatabase db;
     private static String calledFrom;
+    private static Animation zoomin;
+    private static Animation zoomout;
+    private static boolean pressed;
 
     public SingleBookAdapter(Context context, final String bookID, final String from) {
         super(context, new QueryFactory<Books>() {
@@ -50,7 +61,7 @@ public class SingleBookAdapter extends ParseQueryAdapter<Books> {
     }
 
     @Override
-    public View getItemView(Books bookObject, View v, ViewGroup parent) {
+    public View getItemView(Books bookObject, View v, final ViewGroup parent) {
         bookToFavourite = bookObject;
         if (v == null) {
             v = View.inflate(getContext(), R.layout.content_single_book, null);
@@ -92,19 +103,11 @@ public class SingleBookAdapter extends ParseQueryAdapter<Books> {
             addToFavouriteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String query = "DELETE FROM "
-                            + BooksContract.FavouriteBooksIdsEntry.TABLE_NAME
-                            + " WHERE "
-                            + BooksContract.FavouriteBooksIdsEntry.COLUMN_FAVOURITE_BOOK_PARSE_ID
-                            + "='"
-                            + bookToFavourite.getObjectID() + "'";
 
-                    //db.rawQuery(query,null);
-
-                    int a = db.delete(BooksContract.FavouriteBooksIdsEntry.TABLE_NAME,BooksContract.FavouriteBooksIdsEntry.COLUMN_FAVOURITE_BOOK_PARSE_ID
+                    db.delete(BooksContract.FavouriteBooksIdsEntry.TABLE_NAME, BooksContract.FavouriteBooksIdsEntry.COLUMN_FAVOURITE_BOOK_PARSE_ID
                             + "='"
-                            + bookToFavourite.getObjectID() + "'",null);
-                    Log.d("aaaa", a+"");
+                            + bookToFavourite.getObjectID() + "'", null);
+
                     Intent in = new Intent(getContext(), MainActivity.class);
                     in.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     getContext().startActivity(in);
@@ -128,6 +131,24 @@ public class SingleBookAdapter extends ParseQueryAdapter<Books> {
             bookImage.setParseFile(imageFile);
             bookImage.loadInBackground();
         }
+        zoomin = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_in);
+        zoomout = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_out);
+
+        pressed = false;
+        bookImage.setOnLongClickListener(new OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
+                if(!pressed) {
+                    v.bringToFront();
+                    v.startAnimation(zoomin);
+                    pressed = !pressed;
+                } else {
+                    v.startAnimation(zoomout);
+                    pressed = !pressed;
+                }
+                return true;
+            }
+        });
 
         TextView singleBookTitle = (TextView) v.findViewById(R.id.single_book_title);
         singleBookTitle.setText(bookObject.getTitle());

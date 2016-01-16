@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.example.packman.mylibrary.SingleBookActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/activity_single_book_layout">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"

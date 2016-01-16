@@ -42,7 +42,6 @@ public class SingleBookActivity extends AppCompatActivity {
     @Override
     public void onPause(){
         super.onPause();
-        this.overridePendingTransition(R.anim.clockwise_out,R.anim.clockwise_in);
     }
 
     }
