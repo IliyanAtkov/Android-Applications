@@ -2,6 +2,7 @@ package com.example.packman.mylibrary.fragments;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,9 +41,10 @@ public class AuthorsFragment extends Fragment{
 
 
         final AuthorsAdapter mAdapter = new AuthorsAdapter(context);
-        gridView.setAdapter(mAdapter);
 
+        gridView.setAdapter(mAdapter);
         mAdapter.loadObjects();
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

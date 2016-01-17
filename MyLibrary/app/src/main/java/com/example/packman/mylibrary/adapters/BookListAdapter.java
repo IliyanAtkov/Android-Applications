@@ -66,6 +66,7 @@ public class BookListAdapter extends ParseQueryAdapter<Books> implements View.On
                     }
 
                     query.whereContainedIn("objectId",list);
+                    db.close();
                     return query;
                 }
             }

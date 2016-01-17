@@ -11,9 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.packman.mylibrary.Services.LocationService;
 import com.example.packman.mylibrary.Services.ScreenOrientationService;
+import com.example.packman.mylibrary.animations.ZoomOutPageTransformer;
 import com.example.packman.mylibrary.fragments.AuthorsFragment;
 import com.example.packman.mylibrary.fragments.BooksFragment;
 import com.example.packman.mylibrary.fragments.CategoriesFragment;
@@ -38,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(pageAdapter);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setOnTabSelectedListener(
                 new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
                     @Override
                     public void onTabReselected(TabLayout.Tab tab) {
-                        // TODO Auto-generated method stub
                     }
 
                     @Override

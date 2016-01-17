@@ -96,6 +96,7 @@ public class SingleBookAdapter extends ParseQueryAdapter<Books> {
                     } else {
                         Toast.makeText(getContext(), "Book was already added to favourites", Toast.LENGTH_SHORT).show();
                     }
+                    c.close();
                 }
             });
         } else {
@@ -115,6 +116,8 @@ public class SingleBookAdapter extends ParseQueryAdapter<Books> {
 
             });
         }
+
+        db.close();
         Button downloadButton = (Button) v.findViewById(R.id.download_book_button);
         downloadButton.setOnClickListener(new View.OnClickListener() {
             @Override

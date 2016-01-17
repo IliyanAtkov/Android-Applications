@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.packman.mylibrary.Globals.GlobalConstants;
+import com.example.packman.mylibrary.Services.ScreenOrientationService;
+import com.example.packman.mylibrary.animations.DepthPageTransformer;
 import com.example.packman.mylibrary.fragments.AuthorBooksFragment;
 import com.example.packman.mylibrary.fragments.AuthorInfoFragment;
 
@@ -26,7 +28,7 @@ public class SingleAuthorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_author);
 
-
+        startService(new Intent(this, ScreenOrientationService.class));
         pageAdapter = new AuthorPageAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.single_author_pager);
         mViewPager.setAdapter(pageAdapter);
@@ -36,6 +38,7 @@ public class SingleAuthorActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.single_author_tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setPageTransformer(true, new DepthPageTransformer());
         tabLayout.setOnTabSelectedListener(
                 new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
                     @Override
