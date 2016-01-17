@@ -31,10 +31,4 @@ public class SingleAuthorActivity extends AppCompatActivity{
         super.onResume();
         this.overridePendingTransition(R.anim.clockwise_in, R.anim.clockwise_out);
     }
-
-    @Override
-    public void onPause(){
-        super.onPause();
-        this.overridePendingTransition(R.anim.clockwise_out,R.anim.clockwise_in);
-    }
 }

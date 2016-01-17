@@ -18,77 +18,60 @@
 
     <TextView
         android:id="@+id/tv_single_author_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
+        android:gravity="left"
+        android:layout_marginBottom="15dp"
         android:layout_toEndOf="@+id/img_single_author"
         android:layout_toRightOf="@+id/img_single_author"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <LinearLayout
-        android:id="@+id/ll_nationality"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_single_author_name"
-        android:layout_toRightOf="@+id/img_single_author"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/author_nationality"/>
         <TextView
             android:id="@+id/tv_single_author_nationality"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_single_author_name"
+            android:layout_toRightOf="@+id/img_single_author"
+            android:layout_toEndOf="@+id/img_single_author"
+            android:layout_marginBottom="10dp"
+            android:gravity="left"
             android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_born"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_nationality"
-        android:layout_toRightOf="@+id/img_single_author"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/author_born"/>
         <TextView
             android:id="@+id/tv_single_author_born"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_died"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_born"
-        android:layout_toRightOf="@+id/img_single_author"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/author_died"/>
+            android:layout_below="@id/tv_single_author_nationality"
+            android:layout_toRightOf="@+id/img_single_author"
+            android:layout_toEndOf="@+id/img_single_author"
+            android:layout_marginBottom="10dp"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
         <TextView
             android:id="@+id/tv_single_author_died"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/img_single_author"
-    android:layout_alignStart="@+id/img_single_author"
-    android:layout_margin="15dp"
-    android:layout_below="@+id/img_single_author">
-    <TextView
-        android:id="@+id/tv_single_author_biography"
-        android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_single_author_born"
+            android:layout_toRightOf="@+id/img_single_author"
+            android:layout_toEndOf="@+id/img_single_author"
+            android:layout_marginBottom="10dp"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-</ScrollView>
+        android:layout_alignLeft="@+id/img_single_author"
+        android:layout_alignStart="@+id/img_single_author"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/img_single_author">
+        <TextView
+            android:id="@+id/tv_single_author_biography"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </ScrollView>
 </RelativeLayout>

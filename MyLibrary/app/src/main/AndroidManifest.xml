@@ -49,7 +49,6 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".BooksByCategoryActivity"
-            android:label="@string/title_activity_books_by_category"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".SingleAuthorActivity"

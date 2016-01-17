@@ -1,6 +1,7 @@
 package com.example.packman.mylibrary.adapters;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ import com.example.packman.mylibrary.models.Authors;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+
+import java.util.Date;
 
 public class SingleAuthorAdapter extends ParseQueryAdapter<Authors>{
     public SingleAuthorAdapter(Context context,final String authorId){
@@ -55,11 +58,16 @@ public class SingleAuthorAdapter extends ParseQueryAdapter<Authors>{
         holder.authorName.setText(authors.getName());
         holder.authorNationality.setText(authors.getNationality());
         holder.authorBiography.setText(authors.getBiography());
-        holder.authorBorn.setText(authors.getBorn().toString());
-        holder.authorDied.setText(authors.getDied().toString());
+        holder.authorBorn.setText(dateToString(authors.getBorn()));
+        holder.authorDied.setText(dateToString(authors.getDied()));
         new ImageLoadTask(authors.getImgUrl(), holder.authorImage).execute();
 
         return v;
+    }
+
+    private String dateToString(Date date) {
+        java.text.DateFormat dateFormat = DateFormat.getDateFormat(getContext());
+       return dateFormat.format(date);
     }
 
     private static class AuthorHolder {
