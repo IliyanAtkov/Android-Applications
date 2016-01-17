@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -26,6 +27,22 @@ public class BookListAdapter extends ParseQueryAdapter<Books> implements View.On
     private static String bookToPassID;
     private static String calledFrom;
 
+    public BookListAdapter(final Context context, final String from, final String whereParameter) {
+        super(context, new QueryFactory<Books>() {
+            public ParseQuery create() {
+                ParseQuery query = new ParseQuery(GlobalConstants.BOOKS_PARSE_TABLE_NAME);
+                calledFrom = from;
+                if (from == GlobalConstants.CALLED_FROM_CATEGORIES) {
+                    query.whereEqualTo("Category", whereParameter);
+                } else {
+                    query.whereEqualTo("Author", whereParameter);
+                }
+
+                return query;
+            }
+        });
+    }
+
     public BookListAdapter(final Context context, final String from) {
         super(context, new QueryFactory<Books>() {
             public ParseQuery create() {
@@ -33,7 +50,7 @@ public class BookListAdapter extends ParseQueryAdapter<Books> implements View.On
                 calledFrom = from;
                 if (from == GlobalConstants.CALLED_FROM_BOOKS) {
                     return query;
-                } else if (from == GlobalConstants.CALLED_FROM_FAVOURITES) {
+                } else {
                     SQLiteOpenHelper SQLiteHelper = new MyLibraryDbHelper(context);
                     SQLiteDatabase db = SQLiteHelper.getWritableDatabase();
                     String sql = "SELECT "+BooksContract.FavouriteBooksIdsEntry.COLUMN_FAVOURITE_BOOK_PARSE_ID+" FROM "
@@ -49,9 +66,6 @@ public class BookListAdapter extends ParseQueryAdapter<Books> implements View.On
                     }
 
                     query.whereContainedIn("objectId",list);
-                    return query;
-                } else {
-                    query.whereEqualTo("Category", from);
                     return query;
                 }
             }

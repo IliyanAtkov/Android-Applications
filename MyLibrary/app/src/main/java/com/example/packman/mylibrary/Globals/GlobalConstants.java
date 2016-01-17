@@ -14,11 +14,14 @@ public class GlobalConstants {
     public static final String AUTHOR_TO_PASS_ID = "AuthorID";
     public static final String CATEGORY_TO_PASS_ID = "CategoryID";
     public static final String CATEGORY_TITLE_TO_PASS = "CategoryTitle";
+    public static final String AUTHOR_NAME_TO_PASS = "AuthorName";
 
     public static final String PARSE_DATA_KEY="message";
 
     public static final String CALLED_FROM="called_from";
     public static final String CALLED_FROM_FAVOURITES="favourites";
     public static final String CALLED_FROM_BOOKS="books";
+    public static final String CALLED_FROM_AUTHOR_BOOKS = "authorBooks";
+    public static final String CALLED_FROM_CATEGORIES = "categories";
 
 }

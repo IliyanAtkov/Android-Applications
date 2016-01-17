@@ -49,6 +49,7 @@ public class AuthorsFragment extends Fragment{
                 Authors author = mAdapter.getItem(position);
                 Intent intent = new Intent(context, SingleAuthorActivity.class);
                 intent.putExtra(GlobalConstants.AUTHOR_TO_PASS_ID, author.getObjectID());
+                intent.putExtra(GlobalConstants.AUTHOR_NAME_TO_PASS, author.getName());
 
                 startActivity(intent);
             }

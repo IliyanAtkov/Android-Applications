@@ -24,7 +24,7 @@ public class BooksByCategoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String categoryTitle = intent.getExtras().getString(GlobalConstants.CATEGORY_TITLE_TO_PASS);
         booksByCategoryTitle.setText(categoryTitle);
-        BookListAdapter mAdapter = new BookListAdapter(this, categoryTitle);
+        BookListAdapter mAdapter = new BookListAdapter(this, GlobalConstants.CALLED_FROM_CATEGORIES, categoryTitle);
         booksByCategoryList.setAdapter(mAdapter);
         mAdapter.loadObjects();
     }
